@@ -94,4 +94,27 @@ Esto garantiza que los datos **se mantienen incluso si se cierra la aplicación*
 ---
 
 ## 🧱 6. Arquitectura del Proyecto
+/data
+StatsManager.kt -> manejo de persistencia
 
+/model
+Player.kt -> datos del jugador
+Race.kt -> enums de razas
+WeaponType.kt -> enums de armas
+ElementoMagico.kt -> enums de magia
+GameState.kt -> wrapper de estados (opcional)
+
+/ui
+CombateApp.kt -> navegación principal
+
+/ui/screens
+StartScreen.kt
+RaceSelectionScreen.kt
+BattleScreen.kt
+SummaryScreen.kt
+StatsScreen.kt -> historial y estadísticas
+
+Arquitectura basada en:
+✔ MVVM  
+✔ State Hoisting  
+✔ Unidirectional Flow  
