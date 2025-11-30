@@ -17,7 +17,8 @@ import com.example.combateporturnos.R
 
 @Composable
 fun StartScreen(
-    onContinue: (String, String) -> Unit
+    onContinue: (String, String) -> Unit,
+    onVerHistorial: () -> Unit     // 👈 NUEVO CALLBACK
 ) {
     val panel = Color(0xFFF6E7C1).copy(alpha = 0.92f) // pergamino claro
 
@@ -29,6 +30,7 @@ fun StartScreen(
             .fillMaxSize()
             .padding(24.dp)
     ) {
+        // 🖼 FONDO
         Image(
             painter = painterResource(id = R.drawable.bg_start),
             contentDescription = null,
@@ -42,7 +44,7 @@ fun StartScreen(
             modifier = Modifier.align(Alignment.Center)
         ) {
 
-            // TÍTULO
+            // 🏷️ TÍTULO
             Text(
                 "⚔️ Videojuego de combate por turnos ⚔️",
                 textAlign = TextAlign.Center,
@@ -52,7 +54,7 @@ fun StartScreen(
                     .padding(8.dp)
             )
 
-            // ENTRADAS
+            // 🧑 ENTRADAS DE NOMBRE
             OutlinedTextField(
                 value = nombre1,
                 onValueChange = { nombre1 = it },
@@ -71,12 +73,22 @@ fun StartScreen(
                     .padding(6.dp)
             )
 
+            // ▶️ CONTINUAR
             Button(
                 onClick = { onContinue(nombre1.trim(), nombre2.trim()) },
                 enabled = nombre1.isNotBlank() && nombre2.isNotBlank(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3A5BA0))
             ) {
                 Text("Continuar a selección de raza")
+            }
+
+            // 📜 HISTORIAL / ESTADÍSTICAS
+            Button(
+                onClick = onVerHistorial,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF795548)),
+                modifier = Modifier.padding(top = 12.dp)
+            ) {
+                Text("Ver historial y estadísticas")
             }
         }
     }

@@ -7,19 +7,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.combateporturnos.GameViewModel
-import com.example.combateporturnos.model.Race
-import com.example.combateporturnos.model.ElementoMagico
-import com.example.combateporturnos.model.WeaponType
 import com.example.combateporturnos.ui.screens.BattleScreen
 import com.example.combateporturnos.ui.screens.RaceSelectionScreen
 import com.example.combateporturnos.ui.screens.StartScreen
 import com.example.combateporturnos.ui.screens.SummaryScreen
+import com.example.combateporturnos.ui.screens.StatsScreen   // 👈 nueva pantalla
 
 object Routes {
     const val START = "start"
     const val RACE_SELECTION = "race_selection"
     const val BATTLE = "battle"
     const val SUMMARY = "summary"
+    const val STATS = "stats"   // 👈 NUEVA RUTA
 }
 
 @Composable
@@ -31,15 +30,20 @@ fun CombateApp(
         navController = navController,
         startDestination = Routes.START
     ) {
+        // ------------------ PANTALLA DE INICIO ------------------
         composable(Routes.START) {
             StartScreen(
                 onContinue = { nombre1, nombre2 ->
                     gameViewModel.setNombres(nombre1, nombre2)
                     navController.navigate(Routes.RACE_SELECTION)
+                },
+                onVerHistorial = {        // 👈 callback nuevo
+                    navController.navigate(Routes.STATS)
                 }
             )
         }
 
+        // ------------------ SELECCIÓN DE RAZA ------------------
         composable(Routes.RACE_SELECTION) {
             RaceSelectionScreen(
                 onJugadorConfigurado = { idJugador, raza, arma, elemento, ultimo ->
@@ -54,6 +58,7 @@ fun CombateApp(
             )
         }
 
+        // ------------------ COMBATE ------------------
         composable(Routes.BATTLE) {
             BattleScreen(
                 gameViewModel = gameViewModel,
@@ -63,6 +68,7 @@ fun CombateApp(
             )
         }
 
+        // ------------------ RESUMEN ------------------
         composable(Routes.SUMMARY) {
             SummaryScreen(
                 gameViewModel = gameViewModel,
@@ -76,6 +82,16 @@ fun CombateApp(
                     navController.navigate(Routes.START) {
                         popUpTo(Routes.START) { inclusive = true }
                     }
+                }
+            )
+        }
+
+        // ------------------ ESTADÍSTICAS + HISTORIAL ------------------
+        composable(Routes.STATS) {
+            StatsScreen(
+                gameViewModel = gameViewModel,
+                onVolver = {
+                    navController.popBackStack()
                 }
             )
         }
