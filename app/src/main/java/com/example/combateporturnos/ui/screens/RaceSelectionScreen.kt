@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.example.combateporturnos.R
 import com.example.combateporturnos.model.*
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RaceSelectionScreen(
     onJugadorConfigurado: (
@@ -49,6 +52,8 @@ fun RaceSelectionScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.align(Alignment.Center)
         ) {
+
+            // --- TÍTULO ---
             Text(
                 "Configuración Jugador $jugadorActual ⚔",
                 color = Color(0xFF2A1F0F),
@@ -57,6 +62,7 @@ fun RaceSelectionScreen(
                     .padding(8.dp)
             )
 
+            // --- SELECCION RAZA ---
             Text(
                 "Seleccione raza:",
                 color = Color(0xFF2A1F0F),
@@ -65,7 +71,14 @@ fun RaceSelectionScreen(
                     .padding(6.dp)
             )
 
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            // ⭐ FLOWROW RESPONSIVO PARA RAZAS (CENTRADO REAL)
+            FlowRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 Race.values().forEach { race ->
                     FilterChip(
                         selected = razaSeleccionada == race,
@@ -83,8 +96,10 @@ fun RaceSelectionScreen(
                 }
             }
 
-            if (razaSeleccionada != null) {
-                when (razaSeleccionada) {
+            // --- ARMAS / ELEMENTOS SEGÚN RAZA ---
+            razaSeleccionada?.let { raceSelected ->
+
+                when (raceSelected) {
 
                     Race.HUMANO -> {
                         Text(
@@ -95,7 +110,13 @@ fun RaceSelectionScreen(
                                 .padding(6.dp)
                         )
 
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FlowRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 12.dp),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
                             listOf(WeaponType.ESCOPETA, WeaponType.RIFLE).forEach { arma ->
                                 FilterChip(
                                     selected = armaSeleccionada == arma,
@@ -123,7 +144,13 @@ fun RaceSelectionScreen(
                                 .padding(6.dp)
                         )
 
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FlowRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 12.dp),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
                             ElementoMagico.values().forEach { elem ->
                                 FilterChip(
                                     selected = elementoSeleccionado == elem,
@@ -140,6 +167,7 @@ fun RaceSelectionScreen(
                                 )
                             }
                         }
+
                         armaSeleccionada = WeaponType.BACULO
                     }
 
@@ -152,7 +180,13 @@ fun RaceSelectionScreen(
                                 .padding(6.dp)
                         )
 
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FlowRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 12.dp),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
                             listOf(WeaponType.HACHA, WeaponType.MARTILLO).forEach { arma ->
                                 FilterChip(
                                     selected = armaSeleccionada == arma,
@@ -180,7 +214,13 @@ fun RaceSelectionScreen(
                                 .padding(6.dp)
                         )
 
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FlowRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 12.dp),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
                             listOf(WeaponType.PUNIOS, WeaponType.ESPADA).forEach { arma ->
                                 FilterChip(
                                     selected = armaSeleccionada == arma,
@@ -198,11 +238,10 @@ fun RaceSelectionScreen(
                             }
                         }
                     }
-
-                    else -> {}
                 }
             }
 
+            // --- BOTÓN CONTINUAR ---
             Button(
                 onClick = {
                     val raza = razaSeleccionada ?: return@Button
