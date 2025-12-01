@@ -3,9 +3,9 @@ package com.example.combateporturnos.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,6 +16,50 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.combateporturnos.R
 import com.example.combateporturnos.model.*
+
+
+// 🔥 FUNCIÓN GLOBAL PARA OBTENER LA IMAGEN DEL PERSONAJE
+fun getCharacterImage(raza: Race?, arma: WeaponType?, elemento: ElementoMagico?): Int {
+    return when (raza) {
+        Race.HUMANO -> {
+            when (arma) {
+                WeaponType.RIFLE -> R.drawable.humano_rifle
+                WeaponType.ESCOPETA -> R.drawable.humano
+                else -> R.drawable.humano
+            }
+        }
+
+        Race.ORCO -> {
+            when (arma) {
+                WeaponType.HACHA -> R.drawable.orco_hacha
+                WeaponType.MARTILLO -> R.drawable.orco
+                else -> R.drawable.orco
+            }
+        }
+
+        Race.BESTIA -> {
+            when (arma) {
+                WeaponType.ESPADA -> R.drawable.bestia_espada
+                WeaponType.PUNIOS -> R.drawable.bestia
+                else -> R.drawable.bestia
+            }
+        }
+
+        Race.ELFO -> {
+            when (elemento) {
+                ElementoMagico.FUEGO -> R.drawable.elfo_fuego
+                ElementoMagico.AIRE -> R.drawable.elfo_aire
+                ElementoMagico.TIERRA -> R.drawable.elfo_tierra
+                ElementoMagico.AGUA -> R.drawable.elfo_agua
+                else -> R.drawable.elfo_fuego
+            }
+        }
+
+        else -> R.drawable.ic_launcher_foreground
+    }
+}
+
+
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -53,7 +97,7 @@ fun RaceSelectionScreen(
             modifier = Modifier.align(Alignment.Center)
         ) {
 
-            // --- TÍTULO ---
+            // 🔥 TÍTULO
             Text(
                 "Configuración Jugador $jugadorActual ⚔",
                 color = Color(0xFF2A1F0F),
@@ -62,7 +106,25 @@ fun RaceSelectionScreen(
                     .padding(8.dp)
             )
 
-            // --- SELECCION RAZA ---
+
+            // 🔥 PREVIEW DEL PERSONAJE (MUY PRO)
+            if (razaSeleccionada != null) {
+                val img = getCharacterImage(razaSeleccionada, armaSeleccionada, elementoSeleccionado)
+
+                Image(
+                    painter = painterResource(id = img),
+                    contentDescription = "Preview",
+                    modifier = Modifier
+                        .size(150.dp)
+                        .background(panel, RoundedCornerShape(12.dp))
+                        .padding(6.dp),
+                    contentScale = ContentScale.Fit
+                )
+            }
+
+
+
+            // 🔥 SELECCIÓN DE RAZA
             Text(
                 "Seleccione raza:",
                 color = Color(0xFF2A1F0F),
@@ -71,7 +133,7 @@ fun RaceSelectionScreen(
                     .padding(6.dp)
             )
 
-            // ⭐ FLOWROW RESPONSIVO PARA RAZAS (CENTRADO REAL)
+
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -82,7 +144,11 @@ fun RaceSelectionScreen(
                 Race.values().forEach { race ->
                     FilterChip(
                         selected = razaSeleccionada == race,
-                        onClick = { razaSeleccionada = race },
+                        onClick = {
+                            razaSeleccionada = race
+                            armaSeleccionada = null
+                            elementoSeleccionado = null
+                        },
                         label = {
                             Text(
                                 race.name,
@@ -96,24 +162,17 @@ fun RaceSelectionScreen(
                 }
             }
 
-            // --- ARMAS / ELEMENTOS SEGÚN RAZA ---
-            razaSeleccionada?.let { raceSelected ->
 
+            // 🔥 OPCIONES DEPENDIENDO DE LA RAZA
+            razaSeleccionada?.let { raceSelected ->
                 when (raceSelected) {
 
                     Race.HUMANO -> {
-                        Text(
-                            "Armas Disponibles:",
-                            color = Color(0xFF2A1F0F),
-                            modifier = Modifier
-                                .background(panel, RoundedCornerShape(10.dp))
-                                .padding(6.dp)
-                        )
+                        Text("Armas Disponibles:", color = Color(0xFF2A1F0F),
+                            modifier = Modifier.background(panel, RoundedCornerShape(10.dp)).padding(6.dp))
 
                         FlowRow(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp),
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                             horizontalArrangement = Arrangement.Center,
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
@@ -122,13 +181,8 @@ fun RaceSelectionScreen(
                                     selected = armaSeleccionada == arma,
                                     onClick = { armaSeleccionada = arma },
                                     label = {
-                                        Text(
-                                            arma.name,
-                                            color = Color(0xFF2A1F0F),
-                                            modifier = Modifier
-                                                .background(panel, RoundedCornerShape(8.dp))
-                                                .padding(4.dp)
-                                        )
+                                        Text(arma.name, color = Color(0xFF2A1F0F),
+                                            modifier = Modifier.background(panel, RoundedCornerShape(8.dp)).padding(4.dp))
                                     }
                                 )
                             }
@@ -136,18 +190,11 @@ fun RaceSelectionScreen(
                     }
 
                     Race.ELFO -> {
-                        Text(
-                            "Elemento mágico:",
-                            color = Color(0xFF2A1F0F),
-                            modifier = Modifier
-                                .background(panel, RoundedCornerShape(10.dp))
-                                .padding(6.dp)
-                        )
+                        Text("Elemento mágico:", color = Color(0xFF2A1F0F),
+                            modifier = Modifier.background(panel, RoundedCornerShape(10.dp)).padding(6.dp))
 
                         FlowRow(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp),
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                             horizontalArrangement = Arrangement.Center,
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
@@ -156,34 +203,21 @@ fun RaceSelectionScreen(
                                     selected = elementoSeleccionado == elem,
                                     onClick = { elementoSeleccionado = elem },
                                     label = {
-                                        Text(
-                                            elem.name,
-                                            color = Color(0xFF2A1F0F),
-                                            modifier = Modifier
-                                                .background(panel, RoundedCornerShape(8.dp))
-                                                .padding(4.dp)
-                                        )
+                                        Text(elem.name, color = Color(0xFF2A1F0F),
+                                            modifier = Modifier.background(panel, RoundedCornerShape(8.dp)).padding(4.dp))
                                     }
                                 )
                             }
                         }
-
                         armaSeleccionada = WeaponType.BACULO
                     }
 
                     Race.ORCO -> {
-                        Text(
-                            "Escoja arma:",
-                            color = Color(0xFF2A1F0F),
-                            modifier = Modifier
-                                .background(panel, RoundedCornerShape(10.dp))
-                                .padding(6.dp)
-                        )
+                        Text("Escoja arma:", color = Color(0xFF2A1F0F),
+                            modifier = Modifier.background(panel, RoundedCornerShape(10.dp)).padding(6.dp))
 
                         FlowRow(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp),
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                             horizontalArrangement = Arrangement.Center,
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
@@ -192,13 +226,8 @@ fun RaceSelectionScreen(
                                     selected = armaSeleccionada == arma,
                                     onClick = { armaSeleccionada = arma },
                                     label = {
-                                        Text(
-                                            arma.name,
-                                            color = Color(0xFF2A1F0F),
-                                            modifier = Modifier
-                                                .background(panel, RoundedCornerShape(8.dp))
-                                                .padding(4.dp)
-                                        )
+                                        Text(arma.name, color = Color(0xFF2A1F0F),
+                                            modifier = Modifier.background(panel, RoundedCornerShape(8.dp)).padding(4.dp))
                                     }
                                 )
                             }
@@ -206,18 +235,11 @@ fun RaceSelectionScreen(
                     }
 
                     Race.BESTIA -> {
-                        Text(
-                            "Ataque primario:",
-                            color = Color(0xFF2A1F0F),
-                            modifier = Modifier
-                                .background(panel, RoundedCornerShape(10.dp))
-                                .padding(6.dp)
-                        )
+                        Text("Ataque primario:", color = Color(0xFF2A1F0F),
+                            modifier = Modifier.background(panel, RoundedCornerShape(10.dp)).padding(6.dp))
 
                         FlowRow(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp),
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                             horizontalArrangement = Arrangement.Center,
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
@@ -226,13 +248,8 @@ fun RaceSelectionScreen(
                                     selected = armaSeleccionada == arma,
                                     onClick = { armaSeleccionada = arma },
                                     label = {
-                                        Text(
-                                            arma.name,
-                                            color = Color(0xFF2A1F0F),
-                                            modifier = Modifier
-                                                .background(panel, RoundedCornerShape(8.dp))
-                                                .padding(4.dp)
-                                        )
+                                        Text(arma.name, color = Color(0xFF2A1F0F),
+                                            modifier = Modifier.background(panel, RoundedCornerShape(8.dp)).padding(4.dp))
                                     }
                                 )
                             }
@@ -241,7 +258,8 @@ fun RaceSelectionScreen(
                 }
             }
 
-            // --- BOTÓN CONTINUAR ---
+
+            // 🔥 BOTÓN CONTINUAR
             Button(
                 onClick = {
                     val raza = razaSeleccionada ?: return@Button
