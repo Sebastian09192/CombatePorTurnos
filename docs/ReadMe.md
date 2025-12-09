@@ -32,7 +32,8 @@ El juego incluye:
 ## 📌 3. Autor
 **Sebastián Alpízar Arce**  
 Rol: Programador — Diseño, lógica del juego, interfaz, integración y recursos visuales.
-
+**Cristian Rojas Morales** 
+Rol: Revisor — Supervisión general del juego, evaluación de la jugabilidad, corrección de detalles y ajustes visuales menores para mejorar la presentación gráfica. 
 ---
 
 ## 📌 4. Cómo instalar el APK
