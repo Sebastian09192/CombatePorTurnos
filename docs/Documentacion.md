@@ -27,13 +27,13 @@ Este documento describe la arquitectura, lógica interna, reglas implementadas y
 ### ✔ Daños por raza
 Cada raza tiene su propia lógica:
 
-#### Humanos:
+#### PJ Humanos:
 - Armas: escopeta y rifle.  
 - Daño base 1–5.  
 - Rifle a distancia → daño especial 10–20.  
 - Sanación: comen (40%–49%).
 
-#### Elfos:
+#### PJ Elfos:
 - Arma: báculo.  
 - Elementos: fuego, tierra, aire, agua.  
 - Agua → vida base 115.
@@ -41,12 +41,12 @@ Cada raza tiene su propia lógica:
   - Comunes → 65%
   - Agua → 75%–90%
 
-#### Orcos:
+#### PJ Orcos:
 - Hacha → daño + sangrado  
 - Martillo → daño 2–7  
 - Pociones → cura dos fases
 
-#### Bestias:
+#### PJ Bestias:
 - Puños → daño 20–30 pero pierden 10  
 - Espada → daño 1–10  
 - Sanación → dormir (50%)
