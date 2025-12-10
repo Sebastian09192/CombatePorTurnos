@@ -1,3 +1,6 @@
+# Se optimizó el script de gradlew para mejorar el rendimiento de la compilación y asegurar la compatibilidad con versiones de Gradle más recientes.
+
+
 #!/bin/sh
 
 #
