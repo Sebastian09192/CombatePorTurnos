@@ -150,3 +150,11 @@ app/
 ## 📌 9. Licencia
 Uso académico exclusivo para la UTN.  
 Prohibido distribuir el APK fuera del contexto del curso.
+
+## Detalles adicionales
+
+Este proyecto "Combate por Turnos" es un juego interactivo donde los jugadores eligen diferentes razas y armas para enfrentarse en combates por turnos. Cada raza tiene habilidades especiales que afectan las estadísticas del jugador, como daño y sanación.
+
+Los jugadores pueden disfrutar de una experiencia sin conexión, donde el objetivo es reducir la vida del oponente a cero a través de una serie de ataques y defensas.
+
+El juego fue desarrollado utilizando Kotlin y Jetpack Compose, aprovechando las capacidades de Android para ofrecer una experiencia fluida y emocionante.
