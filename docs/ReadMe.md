@@ -92,7 +92,7 @@ Rol: Revisor — Supervisión general del juego, evaluación de la jugabilidad, 
 ### 🎯 Distancia y movimiento
 - 0 = Cerca  
 - 1 = Medio  
-- 2 = Lejos (ambos inician aquí)  
+- 2 = Lejos (los dos inician aquí)  
 - Avanzar / Retroceder afecta capacidad de ataque:  
     - Solo el rifle y la magia aire pueden atacar desde lejos.  
 
