@@ -1,3 +1,5 @@
+# Se realizaron ajustes a las reglas de ProGuard para optimizar la minificación y ofuscación del código, mejorando la seguridad y el rendimiento.
+
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
