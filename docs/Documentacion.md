@@ -1,7 +1,7 @@
 # 📘 Documentación Técnica del Videojuego de Combate por Turnos
 
 ## 1. Introducción
-Este documento describe la arquitectura, lógica interna, reglas implementadas y estructura funcional del videojuego **Combate Por Turnos**, desarrollado en Kotlin utilizando Jetpack Compose.
+Este documento describe la arquitectura, lógica interna, reglas implementadas y estructura funcional del videojuego "Combate Por Turnos", desarrollado en Kotlin utilizando Jetpack Compose.
 
 ---
 
@@ -31,7 +31,7 @@ Cada raza tiene su propia lógica:
 - Armas: escopeta y rifle.  
 - Daño base 1–5.  
 - Rifle a distancia → daño especial 10–20.  
-- Sanación: comen (40%–49%).
+- Sanación: comen y reciben salud en un (40%–49%).
 
 #### PJ Elfos:
 - Arma: báculo.  
