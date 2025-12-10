@@ -62,13 +62,13 @@ Rol: Revisor — Supervisión general del juego, evaluación de la jugabilidad, 
 
 ### ⚔ Razas y mecánicas implementadas
 
-#### 🧍 HUMANOS
+#### 🧍 PJ HUMANOS
 - Armas: Escopeta / Rifle Francotirador  
 - Daño base: 1–5  
 - Rifle a distancia → daño ampliado (10–20)  
 - Sanación: comen → recuperan 40%–49%  
 
-#### 🧝‍♂️ ELFOS (báculo mágico)
+#### 🧝‍♂️ PJ ELFOS (báculo mágico)
 - Fuego → daño aumentado  
 - Tierra → bono leve de ataque + mayor acierto  
 - Aire → daño normal + posibilidad de evasión  
@@ -77,7 +77,7 @@ Rol: Revisor — Supervisión general del juego, evaluación de la jugabilidad, 
   - Elfos comunes → 65%  
   - Agua → 75%–90%  
 
-#### 🪓 ORCOS
+#### 🪓 PJ ORCOS
 - Hacha → daño 1–5 + sangrado (–3 por 2 turnos)  
 - Martillo → daño 2–7  
 - Pociones → cura 25%–45% + extra 5%–25% en siguiente turno  
