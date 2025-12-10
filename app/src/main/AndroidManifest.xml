@@ -1,3 +1,5 @@
+<!-- Se actualizó el archivo AndroidManifest.xml para asegurar la configuración correcta de las actividades y permisos, optimizando el comportamiento de la app. -->
+
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
