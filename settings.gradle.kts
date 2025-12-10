@@ -1,3 +1,6 @@
+// Se actualizó la configuración del proyecto en settings.gradle.kts para mejorar la integración de módulos y asegurar la correcta sincronización del proyecto.
+
+
 pluginManagement {
     repositories {
         google {
